@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -11,6 +12,17 @@ public class GUIManager : MonoBehaviour
     [SerializeField] GameObject towerToBuy;
     [SerializeField] Material opaqueMaterial, transparentMaterial;
     [SerializeField] TextMeshProUGUI moneyUI, enemiesUI, waveUI;
+    [SerializeField] Button nextWaveButton, speedButton;
+    [SerializeField] Sprite regularSpeedSprite, fastSpeedSprite, fastestSpeedSprite;
+
+    private enum Speed
+    {
+        NORMAL,
+        FAST,
+        FASTER
+    }
+
+    private Speed speed;
 
     private LevelManager levelManager;
 
@@ -53,6 +65,11 @@ public class GUIManager : MonoBehaviour
         //Debug.Log(worldPosition.ToString());
     }
 
+    public void ToggleNextWaveButton(bool state)
+    {
+        nextWaveButton.gameObject.SetActive(state);
+    }
+
     public TowerSlot[] GetTowerSlots()
     {
         return towerSlots;
@@ -78,6 +95,21 @@ public class GUIManager : MonoBehaviour
     void UpgradeTower()
     {
 
+    }
+
+    public void ToggleSpeed()
+    {
+        (speedButton.image.sprite, Time.timeScale, speed) = speed switch
+        {
+            Speed.NORMAL => (fastSpeedSprite, 2.0f, Speed.FAST),
+            Speed.FAST => (fastestSpeedSprite, 4.0f, Speed.FASTER),
+            _ => (regularSpeedSprite, 1.0f, Speed.NORMAL)
+        };
+    }
+
+    public void BeginNextWave()
+    {
+        levelManager.BeginNextWave();
     }
 
     public void UpdateMoneyText(string moneyText)

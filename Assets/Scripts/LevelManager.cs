@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     private float currentTimestamp;
     private float currentWaveTimestamp;
 
+    private bool breakTime;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -39,50 +41,52 @@ public class LevelManager : MonoBehaviour
         currentTimestamp = Time.time;
         if (!allWavesFinished)
         {
-            Debug.Log("Enemies remaining: " + (enemiesLeftInWave));
-            enemiesLeftInWave = waves[currentWave].GetTotalEnemyCount() - enemiesDeadInWave;
-            UpdateEnemiesUI();
-            for (int i = waves[currentWave].Subwaves().Count- 1; i >= 0; i--)
+            if (!breakTime)
             {
-                Subwave subwave = waves[currentWave].Subwaves()[i];
-                //enemiesLeftInWave += subwave.NumberToSpawn();
-                if (currentTimestamp >= subwave.SubwaveStartTimestamp() + currentWaveTimestamp)
+                Debug.Log("Enemies remaining: " + (enemiesLeftInWave));
+                enemiesLeftInWave = waves[currentWave].GetTotalEnemyCount() - enemiesDeadInWave;
+                UpdateEnemiesUI();
+                for (int i = waves[currentWave].Subwaves().Count - 1; i >= 0; i--)
                 {
-                    subwave.BeginSubwave();
+                    Subwave subwave = waves[currentWave].Subwaves()[i];
+                    //enemiesLeftInWave += subwave.NumberToSpawn();
+                    if (currentTimestamp >= subwave.SubwaveStartTimestamp() + currentWaveTimestamp)
+                    {
+                        subwave.BeginSubwave();
+                    }
+                    if (currentTimestamp >= subwave.SubwaveEndTimestamp() + currentWaveTimestamp)
+                    {
+                        Debug.Log("Subwave finished at " + currentTimestamp);
+                        waves[currentWave].Subwaves().RemoveAt(i);
+                    }
                 }
-                if (currentTimestamp >= subwave.SubwaveEndTimestamp() + currentWaveTimestamp)
-                {
-                    Debug.Log("Subwave finished at " + currentTimestamp);
-                    waves[currentWave].Subwaves().RemoveAt(i);
-                }
-            }
 
 
-            //Debug.Log(currentTimestamp + ", " + waves[currentWave].WaveEndTimestamp());
-            //if (currentTimestamp >= waves[currentWave].WaveEndTimestamp())
-            //{
-            if (enemiesLeftInWave <= 0)
-            {
-                enemiesLeftInWave = 0;
-                Debug.Log("Wave " + currentWave + " ended at " + currentTimestamp);
-                currentWave++;
-                currentWaveTimestamp = Time.time;
-                if (currentWave >= waves.Count)
+                //Debug.Log(currentTimestamp + ", " + waves[currentWave].WaveEndTimestamp());
+                //if (currentTimestamp >= waves[currentWave].WaveEndTimestamp())
+                //{
+                if (enemiesLeftInWave <= 0)
                 {
-                    //all waves ended
-                    allWavesFinished = true;
-                    Debug.Log("All waves finished");
-                }
-                else
-                {
-                    Debug.Log("Wave " + currentWave + " started at " + currentTimestamp);
-                    waves[currentWave].BeginWave();
-                    enemiesDeadInWave = 0;
-                    //enemiesLeftInWave = waves[currentWave].GetTotalEnemyCount();
-                    UpdateEnemiesUI();
-                    UpdateWaveUI();
+                    enemiesLeftInWave = 0;
+                    Debug.Log("Wave " + currentWave + " ended at " + currentTimestamp);
+                    currentWave++;
+                    currentWaveTimestamp = Time.time;
+                    if (currentWave >= waves.Count)
+                    {
+                        //all waves ended
+                        allWavesFinished = true;
+                        Debug.Log("All waves finished");
+                    }
+                    else
+                    {
+                        //Current wave ended
+                        breakTime = true;
+                        
+                        guiManager.ToggleNextWaveButton(true);
+                    }
                 }
             }
+            
 
             //}
         }
@@ -112,6 +116,19 @@ public class LevelManager : MonoBehaviour
         //{
         //    Debug.Log("All waves finished");
         //}
+    }
+
+    public void BeginNextWave()
+    {
+        breakTime = false;
+        Debug.Log("Wave " + currentWave + " started at " + currentTimestamp);
+        waves[currentWave].BeginWave();
+        enemiesDeadInWave = 0;
+        //enemiesLeftInWave = waves[currentWave].GetTotalEnemyCount();
+        guiManager.ToggleNextWaveButton(false);
+
+        UpdateEnemiesUI();
+        UpdateWaveUI();
     }
 
     public void IncrementEnemiesDead()
