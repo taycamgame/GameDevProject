@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     private LevelManager levelManager;
     private Rigidbody rb;
     private Transform nextTarget;
+    private bool isDead;
 
     private int health;
 
@@ -66,12 +67,18 @@ public class Enemy : MonoBehaviour
         healthbar.UpdateHealthBar(health, maxHealth);
         if (health <= 0)
         {
-            Die(true);
+            health = 0;
+            
+            if (!isDead)
+            {
+                Die(true);
+            }
         }
     }
 
     private void Die(bool killedByPlayer)
     {
+        isDead = true;
         if (killedByPlayer)
         {
             levelManager.GainMoney(moneyReward);

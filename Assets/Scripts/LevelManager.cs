@@ -39,7 +39,7 @@ public class LevelManager : MonoBehaviour
         currentTimestamp = Time.time;
         if (!allWavesFinished)
         {
-            Debug.Log("Enemies remaining: " + (waves[currentWave].GetTotalEnemyCount() - enemiesDeadInWave));
+            Debug.Log("Enemies remaining: " + (enemiesLeftInWave));
             enemiesLeftInWave = waves[currentWave].GetTotalEnemyCount() - enemiesDeadInWave;
             UpdateEnemiesUI();
             for (int i = waves[currentWave].Subwaves().Count- 1; i >= 0; i--)
@@ -61,8 +61,10 @@ public class LevelManager : MonoBehaviour
             //Debug.Log(currentTimestamp + ", " + waves[currentWave].WaveEndTimestamp());
             //if (currentTimestamp >= waves[currentWave].WaveEndTimestamp())
             //{
-            if (waves[currentWave].GetTotalEnemyCount() - enemiesDeadInWave <= 0)
+            if (enemiesLeftInWave <= 0)
             {
+                enemiesLeftInWave = 0;
+                Debug.Log("Wave " + currentWave + " ended at " + currentTimestamp);
                 currentWave++;
                 currentWaveTimestamp = Time.time;
                 if (currentWave >= waves.Count)
@@ -73,7 +75,7 @@ public class LevelManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Wave started at " + currentTimestamp);
+                    Debug.Log("Wave " + currentWave + " started at " + currentTimestamp);
                     waves[currentWave].BeginWave();
                     enemiesDeadInWave = 0;
                     //enemiesLeftInWave = waves[currentWave].GetTotalEnemyCount();
@@ -124,12 +126,12 @@ public class LevelManager : MonoBehaviour
 
     private void UpdateWaveUI()
     {
-        guiManager.UpdateWaveText((currentWave + 1).ToString());
+        guiManager.UpdateWaveText((currentWave + 1).ToString() + "/" + waves.Count);
     }
 
     private void UpdateEnemiesUI()
     {
-        guiManager.UpdateEnemiesText(enemiesLeftInWave.ToString());
+        guiManager.UpdateEnemiesText(enemiesLeftInWave.ToString() + "/" + waves[currentWave].GetTotalEnemyCount());
     }
 
     public int GetMoney()
