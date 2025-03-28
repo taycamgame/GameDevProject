@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 755813339364829779}
   - component: {fileID: 8312086536719739331}
-  - component: {fileID: 473944809034541802}
+  - component: {fileID: 2892479711395560585}
   m_Layer: 6
   m_Name: Tower
   m_TagString: Tower
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3306463124166365029}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.5, y: 0.2, z: -3.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -55,8 +55,8 @@ MonoBehaviour:
   towerShootVelocityMultiplier: 8
   towerShootCooldown: 1
   weaponRotationSpeed: 0.5
---- !u!135 &473944809034541802
-SphereCollider:
+--- !u!65 &2892479711395560585
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -74,8 +74,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &4926193647985742076
 GameObject:
   m_ObjectHideFlags: 0

@@ -40,6 +40,11 @@ public class Tower : MonoBehaviour
         }
     }
 
+    private void OnMouseDown()
+    {
+        Debug.Log("Upgrade menu");
+    }
+
 
     private void FixedUpdate()
     {
