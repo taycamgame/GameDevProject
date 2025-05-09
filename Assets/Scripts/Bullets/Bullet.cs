@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public abstract class Bullet : MonoBehaviour
 {
     [SerializeField] int bulletDamage = 1;
     [SerializeField] float bulletVelocity = 1.0f;
     [SerializeField] float lifetime = 5.0f;
+
+    protected Vector3 targetPosition = Vector3.zero;
 
     private void Update()
     {
@@ -13,6 +15,13 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public abstract void SetInitialVelocity(Vector3 direction, float shootSpeed);
+
+    public void SetTargetPosition(Vector3 position)
+    {
+        targetPosition = position;
     }
 
     public float GetVelocity()

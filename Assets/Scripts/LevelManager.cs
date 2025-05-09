@@ -19,14 +19,14 @@ public class LevelManager : MonoBehaviour
     private float currentTimestamp;
     private float currentWaveTimestamp;
 
-    private bool breakTime;
+    private bool breakTime, levelStarted;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         currentWave = 0;
-        currentWaveTimestamp = Time.time;
-        waves[0].BeginWave();
+        
+        //waves[0].BeginWave();
         enemiesLeftInWave = waves[currentWave].GetTotalEnemyCount();
 
         UpdateMoneyUI();
@@ -37,9 +37,9 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("Wave: " + currentWave.ToString());
         currentTimestamp = Time.time;
-        if (!allWavesFinished)
+        if (levelStarted && !allWavesFinished)
         {
             if (!breakTime)
             {
@@ -70,7 +70,7 @@ public class LevelManager : MonoBehaviour
                     enemiesLeftInWave = 0;
                     Debug.Log("Wave " + currentWave + " ended at " + currentTimestamp);
                     currentWave++;
-                    currentWaveTimestamp = Time.time;
+                    //currentWaveTimestamp = Time.time;
                     if (currentWave >= waves.Count)
                     {
                         //all waves ended
@@ -120,6 +120,13 @@ public class LevelManager : MonoBehaviour
 
     public void BeginNextWave()
     {
+        if (!levelStarted)
+        {
+            
+            levelStarted = true;
+        }
+
+        currentWaveTimestamp = Time.time;
         breakTime = false;
         Debug.Log("Wave " + currentWave + " started at " + currentTimestamp);
         waves[currentWave].BeginWave();
@@ -148,7 +155,14 @@ public class LevelManager : MonoBehaviour
 
     private void UpdateEnemiesUI()
     {
-        guiManager.UpdateEnemiesText(enemiesLeftInWave.ToString() + "/" + waves[currentWave].GetTotalEnemyCount());
+        if (!levelStarted)
+        {
+            guiManager.UpdateEnemiesText("???");
+        }
+        else
+        {
+            guiManager.UpdateEnemiesText(enemiesLeftInWave.ToString() + "/" + waves[currentWave].GetTotalEnemyCount());
+        }
     }
 
     public int GetMoney()

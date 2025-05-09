@@ -13,6 +13,8 @@ public class Tower : MonoBehaviour
 
     private GameObject weaponModel, weaponPosition, closestEnemy;
 
+    private GameObject upgradeUI;
+
     private float shootSpeed;
     private float shootCooldown = 0;
     private bool canShoot = true;
@@ -85,8 +87,8 @@ public class Tower : MonoBehaviour
     public void Shoot(GameObject target, Vector3 direction)
     {
         var newBullet = Instantiate(bullet, weaponPosition.transform.position, Quaternion.identity);
-        //weaponModel.transform.LookAt(weaponModel.transform.position + direction);
         newBullet.transform.LookAt(weaponPosition.transform.position + direction);
-        newBullet.GetComponent<Rigidbody>().linearVelocity = direction * shootSpeed;
+        newBullet.GetComponent<Bullet>().SetInitialVelocity(direction, shootSpeed);
+        newBullet.GetComponent<Bullet>().SetTargetPosition(target.transform.position);
     }
 }

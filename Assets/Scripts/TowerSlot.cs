@@ -28,8 +28,8 @@ public class TowerSlot : MonoBehaviour
 
     public void PlaceTower(GameObject towerToBuild)
     {
-        towerToBuild.transform.position = transform.position;
-        Instantiate(towerToBuild, gameObject.transform.parent);
+        GameObject newTower = Instantiate(towerToBuild, gameObject.transform.parent);
+        newTower.transform.position = transform.position;
         Destroy(gameObject);
     }
 }

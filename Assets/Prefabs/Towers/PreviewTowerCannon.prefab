@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 755813339364829779}
-  - component: {fileID: 8312086536719739331}
-  - component: {fileID: 2892479711395560585}
-  m_Layer: 6
-  m_Name: Tower
+  - component: {fileID: 2533790485543271212}
+  m_Layer: 9
+  m_Name: PreviewTowerCannon
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +34,7 @@ Transform:
   - {fileID: 1969413208201859133}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8312086536719739331
+--- !u!114 &2533790485543271212
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,38 +43,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3306463124166365029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e0c84cb6162c61459711b0cf7a540da, type: 3}
+  m_Script: {fileID: 11500000, guid: 473c96af93a499543a8928be81b3a8f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 6055100846150929482, guid: bcb1127989d6ae0469ab66e44c1a0ae5, type: 3}
-  sightRadius: 5
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  towerShootVelocityMultiplier: 8
-  towerShootCooldown: 1
-  weaponRotationSpeed: 0.5
---- !u!65 &2892479711395560585
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3306463124166365029}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  towerToBuild: {fileID: 3306463124166365029, guid: 6fc0ce0442334594b99d82b52029f992, type: 3}
+  towerCost: 150
 --- !u!1 &4926193647985742076
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,7 +59,7 @@ GameObject:
   - component: {fileID: 6903026326184023674}
   - component: {fileID: 105190170543258373}
   - component: {fileID: 2389568554016513065}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: TowerModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +88,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4926193647985742076}
-  m_Mesh: {fileID: 3203270684752679736, guid: 14c46bb388790e944960193ac877019f, type: 3}
+  m_Mesh: {fileID: 1494647003027084610, guid: 5f40c6e75223ae84686d9f599760d008, type: 3}
 --- !u!23 &2389568554016513065
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -140,7 +112,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6c6f4435e2d56f743b1bc6367f87c01d, type: 2}
+  - {fileID: 2100000, guid: 29376bc1434a1864985242d9b8b58afc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -192,11 +164,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -210,9 +182,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 29376bc1434a1864985242d9b8b58afc, type: 2}
+    - target: {fileID: -7351939200701891598, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -2643173543783292932, guid: c7a8125312accab40b30c455c0e0c40f, type: 3}
+    - target: {fileID: -5754084199372789682, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 5212694878559051640, guid: c7a8125312accab40b30c455c0e0c40f, type: 3}
+    - target: {fileID: -3868710468543803471, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
+      propertyPath: m_Name
+      value: cannon
+      objectReference: {fileID: 0}
+    - target: {fileID: -3868710468543803471, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
       propertyPath: m_Name
       value: WeaponModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1329380249762036386, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -222,6 +218,30 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1329380249762036386, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9659259
+      objectReference: {fileID: 0}
+    - target: {fileID: 1329380249762036386, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.258819
+      objectReference: {fileID: 0}
+    - target: {fileID: 1329380249762036386, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1329380249762036386, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1329380249762036386, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3967493562214342286, guid: 4da800fd845bd2c4eae695da51ec46f9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 29376bc1434a1864985242d9b8b58afc, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
