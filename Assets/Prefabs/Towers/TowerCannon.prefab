@@ -52,7 +52,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
-  towerShootVelocityMultiplier: 8
+  towerShootVelocityMultiplier: 11
   towerShootCooldown: 3
   weaponRotationSpeed: 0.5
 --- !u!65 &2892479711395560585

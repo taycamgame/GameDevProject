@@ -88,7 +88,8 @@ public class Tower : MonoBehaviour
     {
         var newBullet = Instantiate(bullet, weaponPosition.transform.position, Quaternion.identity);
         newBullet.transform.LookAt(weaponPosition.transform.position + direction);
-        newBullet.GetComponent<Bullet>().SetInitialVelocity(direction, shootSpeed);
         newBullet.GetComponent<Bullet>().SetTargetPosition(target.transform.position);
+
+        newBullet.GetComponent<Bullet>().SetInitialVelocity(direction, shootSpeed);
     }
 }

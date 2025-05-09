@@ -8,13 +8,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1539390405098622207, guid: 3252356a87d809b4e9c9a1993bc1d69d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064590060400261479, guid: 3252356a87d809b4e9c9a1993bc1d69d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064590060400261479, guid: 3252356a87d809b4e9c9a1993bc1d69d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064590060400261479, guid: 3252356a87d809b4e9c9a1993bc1d69d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2245415353689527909, guid: 3252356a87d809b4e9c9a1993bc1d69d, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -2383952699438097375, guid: ef66e381b2cd2a14ea38d174805ae6bf, type: 3}
     - target: {fileID: 4708497167159592940, guid: 3252356a87d809b4e9c9a1993bc1d69d, type: 3}
       propertyPath: m_Name
-      value: Cannonball 1
+      value: Cannonball
       objectReference: {fileID: 0}
     - target: {fileID: 7048345340298210301, guid: 3252356a87d809b4e9c9a1993bc1d69d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -56,6 +72,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7516161661055199834, guid: 3252356a87d809b4e9c9a1993bc1d69d, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -82,7 +102,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 3
-  bulletVelocity: 2
+  bulletVelocity: 9
   lifetime: 8
-  targetPosition: {x: 0, y: 0, z: 0}
-  peakHeight: 5
+  peakHeight: 3

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Bullet : MonoBehaviour
 {
-    [SerializeField] int bulletDamage = 1;
+    public int bulletDamage = 1;
     [SerializeField] float bulletVelocity = 1.0f;
     [SerializeField] float lifetime = 5.0f;
 
