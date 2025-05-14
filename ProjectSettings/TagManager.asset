@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - UpgradeUI
   - Ground
+  - TowerSlot
   layers:
   - Default
   - TransparentFX

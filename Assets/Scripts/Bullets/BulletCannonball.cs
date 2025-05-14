@@ -67,7 +67,7 @@ public class BulletCannonball : Bullet
                 Destroy(gameObject);
                 collision.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage);
             }
-            else if (collision.gameObject.tag == "Ground")
+            else if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "TowerSlot")
             {
                 Destroy(gameObject);
             }

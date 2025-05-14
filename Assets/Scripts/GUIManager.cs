@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -26,7 +27,7 @@ public class GUIManager : MonoBehaviour
 
     private LevelManager levelManager;
 
-    private TowerSlot[] towerSlots;
+    private List<TowerSlot> towerSlots;
 
     private Vector3 mousePosition, worldPosition;
 
@@ -40,7 +41,7 @@ public class GUIManager : MonoBehaviour
 
     private void Awake()
     {
-        towerSlots = FindObjectsByType<TowerSlot>(FindObjectsSortMode.None);
+        towerSlots = FindObjectsByType<TowerSlot>(FindObjectsSortMode.None).ToList();
         levelManager = FindFirstObjectByType<LevelManager>();
     }
 
@@ -70,9 +71,18 @@ public class GUIManager : MonoBehaviour
         nextWaveButton.gameObject.SetActive(state);
     }
 
-    public TowerSlot[] GetTowerSlots()
+    public List<TowerSlot> GetTowerSlots()
     {
         return towerSlots;
+    }
+
+    public void RemoveTowerSlot(TowerSlot towerSlot)
+    {
+        towerSlots.Remove(towerSlot);
+    }
+    public void AddTowerSlot(TowerSlot towerSlot)
+    {
+        towerSlots.Add(towerSlot);
     }
 
     public void BuyTower(GameObject towerToBuy)
@@ -83,20 +93,9 @@ public class GUIManager : MonoBehaviour
         //Instantiate(towerToBuild);
         if (towerToBuy.GetComponent<PreviewTower>().GetTowerCost() <= levelManager.GetMoney())
         {
-            Instantiate(towerToBuy);
+            Instantiate(towerToBuy).transform.position = mousePosition;
         }
     }
-
-    void SellTower()
-    {
-
-    }
-
-    void UpgradeTower()
-    {
-
-    }
-
     public void ToggleSpeed()
     {
         (speedButton.image.sprite, Time.timeScale, speed) = speed switch

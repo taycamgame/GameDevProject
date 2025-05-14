@@ -48,6 +48,7 @@ public class PreviewTower : MonoBehaviour
             if (guiManager.GetTowerSlots().Contains(hit.transform.gameObject.GetComponent<TowerSlot>()))
             {
                 hit.transform.gameObject.GetComponent<TowerSlot>().PlaceTower(towerToBuild);
+                guiManager.RemoveTowerSlot(hit.transform.gameObject.GetComponent<TowerSlot>());
                 levelManager.SpendMoney(GetTowerCost());
             }
             Destroy(gameObject);

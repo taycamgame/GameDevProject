@@ -10,10 +10,9 @@ public class Tower : MonoBehaviour
     [SerializeField] float towerShootVelocityMultiplier;
     [SerializeField] float towerShootCooldown = 1.0f;
     [SerializeField] float weaponRotationSpeed = 1.0f;
+    [SerializeField] Canvas upgradeCanvas;
 
     private GameObject weaponModel, weaponPosition, closestEnemy;
-
-    private GameObject upgradeUI;
 
     private float shootSpeed;
     private float shootCooldown = 0;
@@ -45,6 +44,14 @@ public class Tower : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("Upgrade menu");
+        
+        GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
+        Debug.Log("Towers: " + towers.Length);
+        foreach (GameObject tower in towers)
+        {
+            tower.GetComponentInChildren<Canvas>().enabled = false;
+        }
+        upgradeCanvas.enabled = true;
     }
 
 

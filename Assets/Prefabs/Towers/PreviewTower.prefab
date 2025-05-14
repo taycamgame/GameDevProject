@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 473c96af93a499543a8928be81b3a8f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerToBuild: {fileID: 3306463124166365029, guid: 3244364d500f123439a9f85a9345c0af, type: 3}
+  towerToBuild: {fileID: 8413726145585986277, guid: 102ae39c7735c9c43baae1165f767351, type: 3}
   towerCost: 50
 --- !u!1 &4926193647985742076
 GameObject:
