@@ -28,34 +28,36 @@ public class BulletCannonball : Bullet
 
     public override void SetInitialVelocity(Vector3 direction, float shootSpeed)
     {
-        Vector3 start = transform.position;
-        Vector3 end = targetPosition;
+        gameObject.GetComponent<Rigidbody>().linearVelocity = direction * shootSpeed;
 
-        // Horizontal displacement (x and z only)
-        Vector3 displacementXZ = new Vector3(end.x - start.x, 0, end.z - start.z);
+        //Vector3 start = transform.position;
+        //Vector3 end = targetPosition;
 
-        // Vertical distance to peak (from start)
-        float heightDifference = peakHeight - start.y;
-        if (heightDifference <= 0f)
-        {
-            Debug.LogWarning("Peak height must be above the starting point.");
-            heightDifference = 0.1f;
-        }
+        //// Horizontal displacement (x and z only)
+        //Vector3 displacementXZ = new Vector3(end.x - start.x, 0, end.z - start.z);
 
-        // Time to reach the peak
-        float gravity = Mathf.Abs(Physics.gravity.y);
-        float timeToPeak = Mathf.Sqrt(2 * heightDifference / gravity);
+        //// Vertical distance to peak (from start)
+        //float heightDifference = peakHeight - start.y;
+        //if (heightDifference <= 0f)
+        //{
+        //    Debug.LogWarning("Peak height must be above the starting point.");
+        //    heightDifference = 0.1f;
+        //}
 
-        // Total time (up and down)
-        float totalTime = timeToPeak + Mathf.Sqrt(2 * Mathf.Max(0, peakHeight - end.y) / gravity);
+        //// Time to reach the peak
+        //float gravity = Mathf.Abs(Physics.gravity.y);
+        //float timeToPeak = Mathf.Sqrt(2 * heightDifference / gravity);
 
-        // Initial velocity components
-        Vector3 velocityY = Vector3.up * Mathf.Sqrt(2 * gravity * heightDifference);
-        Vector3 velocityXZ = displacementXZ / totalTime;
+        //// Total time (up and down)
+        //float totalTime = timeToPeak + Mathf.Sqrt(2 * Mathf.Max(0, peakHeight - end.y) / gravity);
 
-        // Combine and launch
-        Vector3 finalVelocity = velocityXZ + velocityY;
-        rb.linearVelocity = finalVelocity;
+        //// Initial velocity components
+        //Vector3 velocityY = Vector3.up * Mathf.Sqrt(2 * gravity * heightDifference);
+        //Vector3 velocityXZ = displacementXZ / totalTime;
+
+        //// Combine and launch
+        //Vector3 finalVelocity = velocityXZ + velocityY;
+        //rb.linearVelocity = finalVelocity;
     }
 
     private void OnCollisionEnter(Collision collision)
