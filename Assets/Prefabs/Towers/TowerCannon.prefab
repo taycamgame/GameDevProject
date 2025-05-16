@@ -97,6 +97,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 745538458253659316, guid: bad31936197f908469e2e83e16e9939e, type: 3}
     - target: {fileID: 8312086536719739331, guid: 3244364d500f123439a9f85a9345c0af, type: 3}
+      propertyPath: shootSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8312086536719739331, guid: 3244364d500f123439a9f85a9345c0af, type: 3}
+      propertyPath: attackPower
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8312086536719739331, guid: 3244364d500f123439a9f85a9345c0af, type: 3}
       propertyPath: sightRadius
       value: 8
       objectReference: {fileID: 0}

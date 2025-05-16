@@ -53,6 +53,14 @@ PrefabInstance:
       value: TowerArrow
       objectReference: {fileID: 0}
     - target: {fileID: 8312086536719739331, guid: 3244364d500f123439a9f85a9345c0af, type: 3}
+      propertyPath: shootSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8312086536719739331, guid: 3244364d500f123439a9f85a9345c0af, type: 3}
+      propertyPath: towerShootCooldown
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8312086536719739331, guid: 3244364d500f123439a9f85a9345c0af, type: 3}
       propertyPath: towerShootVelocityMultiplier
       value: 6
       objectReference: {fileID: 0}

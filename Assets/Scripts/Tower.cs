@@ -7,14 +7,13 @@ public class Tower : MonoBehaviour
     [SerializeField] GameObject bullet;
     [SerializeField] float sightRadius = 5.0f;
     [SerializeField] LayerMask enemyLayer;
-    [SerializeField] float towerShootVelocityMultiplier;
+    [SerializeField] float shootSpeed;
     [SerializeField] float towerShootCooldown = 1.0f;
     [SerializeField] float weaponRotationSpeed = 1.0f;
     [SerializeField] Canvas upgradeCanvas;
+    [SerializeField] int attackPower = 1;
 
     private GameObject weaponModel, weaponPosition, closestEnemy;
-
-    private float shootSpeed;
     private float shootCooldown = 0;
     private bool canShoot = true;
 
@@ -25,7 +24,6 @@ public class Tower : MonoBehaviour
     {
         weaponModel = transform.GetChild(1).gameObject;
         weaponPosition = weaponModel.transform.GetChild(0).gameObject;
-        shootSpeed = towerShootVelocityMultiplier * bullet.GetComponent<Bullet>().GetVelocity();
     }
 
     // Update is called once per frame
@@ -95,8 +93,24 @@ public class Tower : MonoBehaviour
     {
         var newBullet = Instantiate(bullet, weaponPosition.transform.position, Quaternion.identity);
         newBullet.transform.LookAt(weaponPosition.transform.position + direction);
+        newBullet.GetComponent<Bullet>().SetDamage(attackPower);
         newBullet.GetComponent<Bullet>().SetTargetPosition(target.transform.position);
-
         newBullet.GetComponent<Bullet>().SetInitialVelocity(direction, shootSpeed);
+    }
+
+    public void IncreasePower()
+    {
+        attackPower++;
+    }
+
+    public void IncreaseRange()
+    {
+        sightRadius += 2;
+    }
+
+    public void IncreaseSpeed()
+    {
+        shootSpeed += 2;
+        shootCooldown -= 0.2f;
     }
 }
