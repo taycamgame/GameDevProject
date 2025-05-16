@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: {fileID: 0}
-  maxHealth: 2
+  maxHealth: 3
   moneyReward: 10
   healthbar: {fileID: 1550903847625715508}
   speed: 2

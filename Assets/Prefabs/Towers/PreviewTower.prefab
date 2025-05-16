@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -3137530229630367314}
   m_Layer: 9
   m_Name: PreviewTower
-  m_TagString: Tower
+  m_TagString: PreviewTower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

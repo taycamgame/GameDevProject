@@ -30,6 +30,7 @@ public class TowerSlot : MonoBehaviour
     {
         GameObject newTower = Instantiate(towerToBuild, gameObject.transform.parent);
         newTower.transform.position = transform.position;
+        newTower.GetComponentInChildren<Canvas>().enabled = true;
         Destroy(gameObject);
     }
 }

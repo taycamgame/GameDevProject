@@ -51,6 +51,7 @@ public class Enemy : MonoBehaviour
             else
             {
                 //no more path points (reached end)
+                levelManager.BaseDamaged();
                 Die(false);
             }
         }

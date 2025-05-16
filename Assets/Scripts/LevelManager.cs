@@ -2,11 +2,13 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] int money = 100;
     [SerializeField] GUIManager guiManager;
+    [SerializeField] int baseHealth = 10;
 
     [SerializeField] List<Wave> waves;
 
@@ -32,6 +34,7 @@ public class LevelManager : MonoBehaviour
         UpdateMoneyUI();
         UpdateWaveUI();
         UpdateEnemiesUI();
+        UpdateHealthUI();
     }
 
     // Update is called once per frame
@@ -75,7 +78,7 @@ public class LevelManager : MonoBehaviour
                     {
                         //all waves ended
                         allWavesFinished = true;
-                        Debug.Log("All waves finished");
+                        Win();
                     }
                     else
                     {
@@ -138,6 +141,18 @@ public class LevelManager : MonoBehaviour
         UpdateWaveUI();
     }
 
+    public void RetryButton()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void MenuButton()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void IncrementEnemiesDead()
     {
         enemiesDeadInWave++;
@@ -153,6 +168,11 @@ public class LevelManager : MonoBehaviour
         guiManager.UpdateWaveText((currentWave + 1).ToString() + "/" + waves.Count);
     }
 
+    private void UpdateHealthUI()
+    {
+        guiManager.UpdateHealthText(baseHealth.ToString());
+    }
+
     private void UpdateEnemiesUI()
     {
         if (!levelStarted)
@@ -163,6 +183,48 @@ public class LevelManager : MonoBehaviour
         {
             guiManager.UpdateEnemiesText(enemiesLeftInWave.ToString() + "/" + waves[currentWave].GetTotalEnemyCount());
         }
+    }
+
+    public void BaseDamaged()
+    {
+        baseHealth--;
+        if (baseHealth <= 0)
+        {
+            Lose();
+        }
+        guiManager.UpdateHealthText(baseHealth.ToString());
+    }
+
+    public void Lose()
+    {
+        guiManager.GetComponent<Canvas>().enabled = false;
+        GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
+        if (towers.Length > 0)
+        {
+            foreach (GameObject tower in towers)
+            {
+                tower.GetComponentInChildren<Canvas>().enabled = false;
+            }
+        }
+        gameObject.GetComponentInChildren<Canvas>().enabled = true;
+        GameObject.FindGameObjectWithTag("Win").SetActive(false);
+        Time.timeScale = 0f;
+    }
+
+    public void Win()
+    {
+        guiManager.GetComponent<Canvas>().enabled = false;
+        GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
+        if (towers.Length > 0)
+        {
+            foreach (GameObject tower in towers)
+            {
+                tower.GetComponentInChildren<Canvas>().enabled = false;
+            }
+        }
+        gameObject.GetComponentInChildren<Canvas>().enabled = true;
+        GameObject.FindGameObjectWithTag("Lose").SetActive(false);
+        Time.timeScale = 0f;
     }
 
     public int GetMoney()

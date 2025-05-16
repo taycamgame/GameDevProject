@@ -12,7 +12,7 @@ public class GUIManager : MonoBehaviour
 {
     [SerializeField] GameObject towerToBuy;
     [SerializeField] Material opaqueMaterial, transparentMaterial;
-    [SerializeField] TextMeshProUGUI moneyUI, enemiesUI, waveUI;
+    [SerializeField] TextMeshProUGUI moneyUI, enemiesUI, waveUI, healthUI;
     [SerializeField] Button nextWaveButton, speedButton;
     [SerializeField] Sprite regularSpeedSprite, fastSpeedSprite, fastestSpeedSprite;
 
@@ -124,5 +124,10 @@ public class GUIManager : MonoBehaviour
     public void UpdateEnemiesText(string enemiesText)
     {
         enemiesUI.text = enemiesText;
+    }
+
+    public void UpdateHealthText(string healthText)
+    {
+        healthUI.text = healthText;
     }
 }

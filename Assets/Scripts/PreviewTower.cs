@@ -21,7 +21,17 @@ public class PreviewTower : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        Debug.Log("HIDE GUI");
+        guiManager.GetComponent<Canvas>().enabled = false;
+        GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
+        if (towers.Length > 0)
+        {
+            foreach (GameObject tower in towers)
+            {
+                tower.GetComponentInChildren<Canvas>().enabled = false;
+            }
+        }
+
     }
 
     // Update is called once per frame
@@ -51,6 +61,7 @@ public class PreviewTower : MonoBehaviour
                 guiManager.RemoveTowerSlot(hit.transform.gameObject.GetComponent<TowerSlot>());
                 levelManager.SpendMoney(GetTowerCost());
             }
+            guiManager.GetComponent<Canvas>().enabled = true;
             Destroy(gameObject);
         }
     }

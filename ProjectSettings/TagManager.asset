@@ -10,6 +10,9 @@ TagManager:
   - UpgradeUI
   - Ground
   - TowerSlot
+  - PreviewTower
+  - Lose
+  - Win
   layers:
   - Default
   - TransparentFX
